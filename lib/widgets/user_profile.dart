@@ -16,6 +16,13 @@ class UserProfile extends StatelessWidget {
     MenuRowData(Icons.brush, 'Оформление'),
     MenuRowData(Icons.language, 'Язык'),
   ];
+  List<MenuRowData> thirdMenuRow =[
+    MenuRowData(Icons.lock_clock, 'Apple watch')
+  ];
+  List<MenuRowData> fourMenuRow =[
+    MenuRowData(Icons.help, 'Помощь'),
+    MenuRowData(Icons.question_answer, 'Вопросы в Telegram'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,14 +34,17 @@ class UserProfile extends StatelessWidget {
 
       body: Container(
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
           children: [
             _UserInfo(),
             SizedBox(height: 30,),
             _MenuWidget(menuRow: firstMenuRow,),
             SizedBox(height: 30,),
-            _MenuWidget(menuRow: secondMenuRow,)
+            _MenuWidget(menuRow: secondMenuRow,),
+            SizedBox(height: 30,),
+            _MenuWidget(menuRow: thirdMenuRow),
+            SizedBox(height: 30,),
+            _MenuWidget(menuRow: fourMenuRow,)
           ],
         ),
       ),
@@ -94,21 +104,36 @@ class _UserInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      width: double.infinity,
-      child: Column(
-        children: [
-          SizedBox(height: 30),
-          _AvatarWidget(),
-          SizedBox(height: 30),
-          _UserNameWidget(),
-          SizedBox(height: 10),
-          _UserPhoneWidget(),
-          SizedBox(height: 10),
-          _UserNickNameWidget(),
-        ],
+    return Stack(
+      children:[
+        Container(
+        color: Colors.white,
+        width: double.infinity,
+        child: Column(
+          children: [
+            SizedBox(height: 30),
+            _AvatarWidget(),
+            SizedBox(height: 30),
+            _UserNameWidget(),
+            SizedBox(height: 10),
+            _UserPhoneWidget(),
+            SizedBox(height: 10),
+            _UserNickNameWidget(),
+          ],
+        ),
       ),
+        Positioned(
+          top: 25,
+            right: 25,
+            child: Text(
+                'Изм.',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 17,)
+            )
+        )
+
+    ]
     );
   }
 }
@@ -125,7 +150,7 @@ class _UserNickNameWidget extends StatelessWidget {
         '@kasane_jp',
         style: TextStyle(
         color: Colors.grey,
-        fontSize: 18,)
+        fontSize: 17,)
     );
   }
 }
